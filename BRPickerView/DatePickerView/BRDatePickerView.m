@@ -115,6 +115,9 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
     self.maxDate = [self handlerMaxDate:self.maxDate];
     
     BOOL minMoreThanMax = [self br_compareDate:self.minDate targetDate:self.maxDate dateFormat:self.dateFormatter] == NSOrderedDescending;
+    if (self.pickerMode == BRDatePickerModeHMS) {
+        minMoreThanMax = NO;
+    }
     NSAssert(!minMoreThanMax, @"最小日期不能大于最大日期！");
     if (minMoreThanMax) {
         // 如果最小日期大于了最大日期，就忽略两个值
